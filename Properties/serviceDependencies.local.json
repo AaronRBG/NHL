@@ -4,6 +4,7 @@
       "type": "secrets.user"
     },
     "mssql1": {
+      "resourceId": null,
       "type": "mssql.onprem",
       "connectionId": "server=localhost;database=NHL;Trusted_Connection=True;",
       "secretStore": "LocalSecretsFile"
