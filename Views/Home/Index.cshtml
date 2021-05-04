@@ -1,8 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    @using NHL.Models
+    @model NHL.Models.Info
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>MP</th>
+                <th>ML</th>
+                <th>RW</th>
+                <th>RL</th>
+                <th>OW</th>
+                <th>OL</th>
+                <th>SW</th>
+                <th>SL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Standing s in Model.standings.standings)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(s.ID_Team)</td>
+                    <td>@s.Points</td>
+                    <td>@s.Matches_Played</td>
+                    <td>@s.Matches_Left</td>
+                    <td>@s.Regulation_Wins</td>
+                    <td>@s.Regulation_Losses</td>
+                    <td>@s.Overtime_Wins</td>
+                    <td>@s.Overtime_Losses</td>
+                    <td>@s.Shootout_Wins</td>
+                    <td>@s.Shootout_Losses</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
