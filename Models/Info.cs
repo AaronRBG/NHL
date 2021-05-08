@@ -21,5 +21,7 @@ namespace NHL.Models
         public TeamDAO teams { get; set; }
         public Win_TypeDAO win_types { get; set; }
         public SeasonDAO seasons { get; set; }
+        public Dictionary<byte, float[]> magicNumbersDivision { get; set; }
+        public Dictionary<byte, float[]> magicNumbersConference { get; set; }
     }
 }

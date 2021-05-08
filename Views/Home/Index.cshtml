@@ -2,8 +2,14 @@
     @using NHL.Models
     @model NHL.Models.Info
 }
-
+@{
+    Standing[] central = Model.standings.standings.Where(s => s.Division == 1).ToArray();
+    Standing[] east = Model.standings.standings.Where(s => s.Division == 2).ToArray();
+    Standing[] west = Model.standings.standings.Where(s => s.Division == 3).ToArray();
+    Standing[] north = Model.standings.standings.Where(s => s.Division == 4).ToArray();
+}
 <div class="text-center">
+    <h4>CENTRAL DIVISION</h4>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -20,7 +26,109 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Standing s in Model.standings.standings)
+            @foreach (Standing s in central)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(s.ID_Team)</td>
+                    <td>@s.Points</td>
+                    <td>@s.Matches_Played</td>
+                    <td>@s.Matches_Left</td>
+                    <td>@s.Regulation_Wins</td>
+                    <td>@s.Regulation_Losses</td>
+                    <td>@s.Overtime_Wins</td>
+                    <td>@s.Overtime_Losses</td>
+                    <td>@s.Shootout_Wins</td>
+                    <td>@s.Shootout_Losses</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>EAST DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>MP</th>
+                <th>ML</th>
+                <th>RW</th>
+                <th>RL</th>
+                <th>OW</th>
+                <th>OL</th>
+                <th>SW</th>
+                <th>SL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Standing s in east)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(s.ID_Team)</td>
+                    <td>@s.Points</td>
+                    <td>@s.Matches_Played</td>
+                    <td>@s.Matches_Left</td>
+                    <td>@s.Regulation_Wins</td>
+                    <td>@s.Regulation_Losses</td>
+                    <td>@s.Overtime_Wins</td>
+                    <td>@s.Overtime_Losses</td>
+                    <td>@s.Shootout_Wins</td>
+                    <td>@s.Shootout_Losses</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>WEST DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>MP</th>
+                <th>ML</th>
+                <th>RW</th>
+                <th>RL</th>
+                <th>OW</th>
+                <th>OL</th>
+                <th>SW</th>
+                <th>SL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Standing s in west)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(s.ID_Team)</td>
+                    <td>@s.Points</td>
+                    <td>@s.Matches_Played</td>
+                    <td>@s.Matches_Left</td>
+                    <td>@s.Regulation_Wins</td>
+                    <td>@s.Regulation_Losses</td>
+                    <td>@s.Overtime_Wins</td>
+                    <td>@s.Overtime_Losses</td>
+                    <td>@s.Shootout_Wins</td>
+                    <td>@s.Shootout_Losses</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>NORTH DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>Points</th>
+                <th>MP</th>
+                <th>ML</th>
+                <th>RW</th>
+                <th>RL</th>
+                <th>OW</th>
+                <th>OL</th>
+                <th>SW</th>
+                <th>SL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Standing s in north)
             {
                 <tr>
                     <td>@Model.teams.getTeamFullName(s.ID_Team)</td>

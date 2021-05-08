@@ -1,0 +1,213 @@
+﻿@{
+    @using NHL.Models
+    @model NHL.Models.Info
+}
+@{
+    Standing[] central = Model.standings.standings.Where(s => s.Division == 1).ToArray();
+    Standing[] east = Model.standings.standings.Where(s => s.Division == 2).ToArray();
+    Standing[] west = Model.standings.standings.Where(s => s.Division == 3).ToArray();
+    Standing[] north = Model.standings.standings.Where(s => s.Division == 4).ToArray();
+    byte[] centralTeams = Model.standings.getDivisionTeams(1);
+    byte[] eastTeams = Model.standings.getDivisionTeams(2);
+    byte[] westTeams = Model.standings.getDivisionTeams(3);
+    byte[] northTeams = Model.standings.getDivisionTeams(4);
+    int[] Plooseness = Model.standings.standings.Select(s => s.Matches_Left * 2).ToArray();
+    string better = "<-";
+}
+<div class="text-center">
+    <h4>CENTRAL DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (byte teamA in centralTeams)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(teamA)</td>
+                    @for (int i = 0; i < centralTeams.Length; i++)
+                    {
+                        int Clooseness = Plooseness[teamA - 1] / 2 + Plooseness[centralTeams[i] - 1] / 2;
+                        float res = @Model.magicNumbersDivision[teamA][i];
+                        if (res > Clooseness)
+                        {
+                            <td class="table-danger">*</td>
+                        }
+                        else if (res > Plooseness[teamA - 1])
+                        {
+                            <td class="table-warning">@res</td>
+                        }
+                        else if (res >= 0)
+                        {
+                            <td class="table-primary">@res</td>
+                        }
+                        else if (res == 0)
+                        {
+                            <td class="table-info">-</td>
+                        }
+                        else
+                        {
+                            <td class="table-success">@better</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>EAST DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (byte teamA in eastTeams)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(teamA)</td>
+                    @for (int i = 0; i < eastTeams.Length; i++)
+                    {
+                        int Clooseness = Plooseness[teamA - 1] / 2 + Plooseness[eastTeams[i] - 1] / 2;
+                        float res = @Model.magicNumbersDivision[teamA][i];
+                        if (res > Clooseness)
+                        {
+                            <td class="table-danger">*</td>
+                        }
+                        else if (res > Plooseness[teamA - 1])
+                        {
+                            <td class="table-warning">@res</td>
+                        }
+                        else if (res >= 0)
+                        {
+                            <td class="table-primary">@res</td>
+                        }
+                        else if (res == 0)
+                        {
+                            <td class="table-info">-</td>
+                        }
+                        else
+                        {
+                            <td class="table-success">@better</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>WEST DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (byte teamA in westTeams)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(teamA)</td>
+                    @for (int i = 0; i < westTeams.Length; i++)
+                    {
+                        int Clooseness = Plooseness[teamA - 1] / 2 + Plooseness[westTeams[i] - 1] / 2;
+                        float res = @Model.magicNumbersDivision[teamA][i];
+                        if (res > Clooseness)
+                        {
+                            <td class="table-danger">*</td>
+                        }
+                        else if (res > Plooseness[teamA - 1])
+                        {
+                            <td class="table-warning">@res</td>
+                        }
+                        else if (res >= 0)
+                        {
+                            <td class="table-primary">@res</td>
+                        }
+                        else if (res == 0)
+                        {
+                            <td class="table-info">-</td>
+                        }
+                        else
+                        {
+                            <td class="table-success">@better</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>NORTH DIVISION</h4>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Team</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (byte teamA in northTeams)
+            {
+                <tr>
+                    <td>@Model.teams.getTeamFullName(teamA)</td>
+                    @for (int i = 0; i < northTeams.Length; i++)
+                    {
+                        int Clooseness = Plooseness[teamA - 1] / 2 + Plooseness[northTeams[i] - 1] / 2;
+                        float res = @Model.magicNumbersDivision[teamA][i];
+                        if (res > Clooseness)
+                        {
+                            <td class="table-danger">*</td>
+                        }
+                        else if (res > Plooseness[teamA - 1])
+                        {
+                            <td class="table-warning">@res</td>
+                        }
+                        else if (res >= 0)
+                        {
+                            <td class="table-primary">@res</td>
+                        }
+                        else if (res == 0)
+                        {
+                            <td class="table-info">-</td>
+                        }
+                        else
+                        {
+                            <td class="table-success">@better</td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

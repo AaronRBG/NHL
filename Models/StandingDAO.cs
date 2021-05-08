@@ -17,10 +17,16 @@ namespace NHL.Models
             List<Standing> aux = new List<Standing>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                Standing s = new Standing((byte)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (byte)dt.Rows[i][5], (byte)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (byte)dt.Rows[i][9], (byte)dt.Rows[i][10]);
+                Standing s = new Standing((byte)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (byte)dt.Rows[i][5], (byte)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (byte)dt.Rows[i][9], (byte)dt.Rows[i][10], (byte)dt.Rows[i][11], (byte)dt.Rows[i][12]);
                 aux.Add(s);
             }
             standings = aux.ToArray();
         }
+
+        public byte[] getDivisionTeams(byte division)
+        {
+            return standings.Where(s => s.Division == division).Select(s => s.ID_Team).ToArray();
+        }
+
     }
 }

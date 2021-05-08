@@ -7,7 +7,7 @@ namespace NHL.Models
 {
     public class Standing
     {
-        public Standing(byte iD_Team, byte points, byte matches_Played, byte matches_Left, byte regulation_Wins, byte regulation_Losses, byte overtime_Wins, byte overtime_Losses, byte shootout_Wins, byte shootout_Losses, byte iD_Season)
+        public Standing(byte iD_Team, byte points, byte matches_Played, byte matches_Left, byte regulation_Wins, byte regulation_Losses, byte overtime_Wins, byte overtime_Losses, byte shootout_Wins, byte shootout_Losses, byte iD_Season, byte division, byte conference)
         {
             ID_Team = iD_Team;
             Points = points;
@@ -20,6 +20,8 @@ namespace NHL.Models
             Shootout_Wins = shootout_Wins;
             Shootout_Losses = shootout_Losses;
             ID_Season = iD_Season;
+            Division = division;
+            Conference = conference;
         }
         public byte ID_Team { get; set; }
         public byte Points { get; set; }
@@ -32,5 +34,7 @@ namespace NHL.Models
         public byte Shootout_Wins { get; set; }
         public byte Shootout_Losses { get; set; }
         public byte ID_Season { get; set; }
+        public byte Division { get; set; }
+        public byte Conference { get; set; }
     }
 }

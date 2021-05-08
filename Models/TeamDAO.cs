@@ -36,5 +36,6 @@ namespace NHL.Models
             Team aux = teams.Single(t => t.ID_Team == teamID);
             return aux.Team_City + ' ' + aux.Team_Name;
         }
+
     }
 }
