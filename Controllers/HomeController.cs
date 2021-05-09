@@ -12,6 +12,7 @@ using HtmlAgilityPack;
 using System.Text;
 using System.Net.Http;
 using System.Net;
+using System.Data;
 
 namespace NHL.Controllers
 {
@@ -42,14 +43,16 @@ namespace NHL.Controllers
             var response = CallUrl(url).Result;
             ParseHtml(response);
             info.matches = matchDAO;
+            return View("Standings", info);
+        }
+
+        public IActionResult Standings()
+        {
             return View(info);
         }
 
         public IActionResult MagicNumbers()
         {
-            float[][] h2h = calculateH2H();
-            int[][] pb = calculatePB();
-            info.magicNumbersDivision = calculateMagicNumbersDivision(h2h, pb);
             return View(info);
         }
 
@@ -120,74 +123,6 @@ namespace NHL.Controllers
                 }
             }
             matchDAO.insertNewMatches(matches.ToArray());
-        }
-
-        private float[][] calculateH2H()
-        {
-            const int N_TEAMS = 31;
-            float[][] res = new float[N_TEAMS][];
-
-            for (int i = 0; i < N_TEAMS; i++)
-            {
-                float[] aux = new float[N_TEAMS];
-                for (int j = 0; j < N_TEAMS; j++)
-                {
-                    /*DataSet ds = Broker.Instance().Run("SELECT TOP 1 calculateH2H(" + (i+1).ToString() + "," + (j+1)(i+1).ToString() + ") FROM [dbo].[Standings]", "H2H");
-                    DataTable dt = ds.Tables["H2H"];
-                    int h2h = (int)dt.Rows[0][0];
-                    switch(h2h)
-                    {
-                        case 1: aux[j] = 0.5; break;
-                        case 2: aux[j] = -0.5; break;
-                        default: aux[j] = 0; break;
-                    }*/
-                    aux[j] = 0;
-                }
-                res[i] = aux;
-            }
-            return res;
-        }
-
-        private int[][] calculatePB()
-        {
-            const int N_TEAMS = 31;
-            int[][] res = new int[N_TEAMS][];
-
-            for (int i = 0; i < N_TEAMS; i++)
-            {
-                int[] aux = new int[N_TEAMS];
-                for (int j = 0; j < N_TEAMS; j++)
-                {
-                    Standing a = info.standings.standings.First(s => s.ID_Team == i + 1);
-                    Standing b = info.standings.standings.First(s => s.ID_Team == j + 1);
-                    aux[j] = a.Points - b.Points;
-                }
-                res[i] = aux;
-            }
-            return res;
-        }
-
-        private Dictionary<byte, float[]> calculateMagicNumbersDivision(float[][] h2h, int[][] pb)
-        {
-            Dictionary<byte, float[]> res = new Dictionary<byte, float[]>();
-
-            for (byte division = 1; division < 5; division++)
-            {
-                byte[] teams = info.standings.getDivisionTeams(division);
-
-                for (int i = 0; i < teams.Length; i++)
-                {
-                    float[] aux = new float[teams.Length];
-                    for (int j = 0; j < teams.Length; j++)
-                    {
-                        aux[j] = info.standings.standings.Where(s => s.ID_Team == teams[i]).Select(s => s.Matches_Left * 2).First() - pb[teams[i]-1][teams[j]-1] + h2h[teams[i]-1][teams[j]-1];
-                    }
-                    Array.Sort(aux);
-                    Array.Reverse(aux);
-                    res.Add(teams[i], aux);
-                }
-            }
-            return res;
         }
     }
 }
