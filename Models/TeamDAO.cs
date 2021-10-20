@@ -13,12 +13,12 @@ namespace NHL.Models
 
         public TeamDAO() 
         {
-            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Teams]", "Teams");
+            DataSet ds = Broker.Instance().Run("SELECT ID_Team, Team_Name FROM [dbo].[Teams]", "Teams");
             DataTable dt = ds.Tables["Teams"];
             List<Team> aux = new List<Team>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                Team t = new Team((byte)dt.Rows[i][0], (string)dt.Rows[i][1], (string)dt.Rows[i][2]);
+                Team t = new Team((byte)dt.Rows[i][0], (string)dt.Rows[i][1]);
                 aux.Add(t);
             }
             teams = aux.ToArray();
@@ -26,15 +26,30 @@ namespace NHL.Models
 
         public byte getTeamID(string team_name)
         {
-            DataSet ds = Broker.Instance().Run("SELECT [ID_Team] FROM [dbo].[Teams] WHERE CONCAT([Team_City],' ',[Team_Name]) = '" + team_name + "'", "ID_Team");
-            DataTable dt = ds.Tables["ID_Team"];
-            return (byte)dt.Rows[0][0];
+            //string[] levels = { "Team_Alias4", "Team_Alias3", "Team_Alias2", "Team_Alias1", "Team_Name" };
+            //string[] levels = { "Team_Name", "Team_Alias1", "Team_Alias2", "Team_Alias3", "Team_Alias4" };
+            bool found = false;
+            byte res = 0;
+            while (!found)
+            {
+                DataSet ds = Broker.Instance().Run("SELECT [ID_Team] FROM [dbo].[Teams] WHERE [Team_Name] = '" + team_name + "'", "ID_Team");
+                DataTable dt = ds.Tables["ID_Team"];
+                if(dt.Rows.Count != 0)
+                {
+                    found = true;
+                    res = (byte)dt.Rows[0][0];
+                } else
+                {
+                    res++;
+                }
+            }
+            return res;
         }
 
-        public string getTeamFullName(byte teamID)
+        public string getTeamName(byte teamID)
         {
             Team aux = teams.Single(t => t.ID_Team == teamID);
-            return aux.Team_City + ' ' + aux.Team_Name;
+            return aux.Team_Name;
         }
 
     }

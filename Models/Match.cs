@@ -7,7 +7,7 @@ namespace NHL.Models
 {
     public class Match
     {
-        public Match(byte local_Team, byte visitor_Team, byte local_Goals, byte visitor_Goals, DateTime match_Date, byte season, byte win_Type, bool regular_Season)
+        public Match(byte local_Team, byte visitor_Team, byte local_Goals, byte visitor_Goals, DateTime match_Date, int season, byte win_Type, bool regular_Season)
         {
             Local_Team = local_Team;
             Visitor_Team = visitor_Team;
@@ -18,7 +18,7 @@ namespace NHL.Models
             Win_Type = win_Type;
             Regular_Season = regular_Season;
         }
-        public Match(long iD_Match, byte local_Team, byte visitor_Team, byte local_Goals, byte visitor_Goals, DateTime match_Date, byte season, byte winner, byte win_Type, bool regular_Season)
+        public Match(long iD_Match, byte local_Team, byte visitor_Team, byte local_Goals, byte visitor_Goals, DateTime match_Date, int season, byte winner, byte win_Type, bool regular_Season)
         {
             ID_Match = iD_Match;
             Local_Team = local_Team;
@@ -38,7 +38,7 @@ namespace NHL.Models
         public byte Local_Goals { get; set; }
         public byte Visitor_Goals { get; set; }
         public DateTime Match_Date { get; set; }
-        public byte Season { get; set; }
+        public int Season { get; set; }
         public byte Winner { get; set; }
         public byte Win_Type { get; set; }
         public bool Regular_Season { get; set; }
