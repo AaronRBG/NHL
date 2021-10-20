@@ -6,45 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\icons\AnaheimDucks.ico" />
-    <None Include="wwwroot\icons\ArizonaCoyotes.ico" />
-    <None Include="wwwroot\icons\BostonBruins.ico" />
-    <None Include="wwwroot\icons\BuffaloSabres.ico" />
-    <None Include="wwwroot\icons\CalgaryFlames.ico" />
-    <None Include="wwwroot\icons\CarolinaHurricanes.ico" />
-    <None Include="wwwroot\icons\ChicagoBlackhawks.ico" />
-    <None Include="wwwroot\icons\ColoradoAvalanche.ico" />
-    <None Include="wwwroot\icons\ColumbusBlueJackets.ico" />
-    <None Include="wwwroot\icons\DallasStars.ico" />
-    <None Include="wwwroot\icons\DetroitRedWings.ico" />
-    <None Include="wwwroot\icons\EasternConference.ico" />
-    <None Include="wwwroot\icons\EdmontonOilers.ico" />
-    <None Include="wwwroot\icons\FloridaPanthers.ico" />
-    <None Include="wwwroot\icons\LosAngelesKings.ico" />
-    <None Include="wwwroot\icons\MinnesotaWild.ico" />
-    <None Include="wwwroot\icons\MontrealCanadiens.ico" />
-    <None Include="wwwroot\icons\NashvillePredators.ico" />
-    <None Include="wwwroot\icons\NewJerseyDevils.ico" />
-    <None Include="wwwroot\icons\NewYorkIslanders.ico" />
-    <None Include="wwwroot\icons\NewYorkRangers.ico" />
-    <None Include="wwwroot\icons\NHL.ico" />
-    <None Include="wwwroot\icons\OttawaSenators.ico" />
-    <None Include="wwwroot\icons\PhiladelphiaFlyers.ico" />
-    <None Include="wwwroot\icons\PittsburghPenguins.ico" />
-    <None Include="wwwroot\icons\Playoffs.ico" />
-    <None Include="wwwroot\icons\SanJoseSharks.ico" />
-    <None Include="wwwroot\icons\SeattleKraken.ico" />
-    <None Include="wwwroot\icons\StLouisBlues.ico" />
-    <None Include="wwwroot\icons\TampaBayLightning.ico" />
-    <None Include="wwwroot\icons\TorontoMapleLeafs.ico" />
-    <None Include="wwwroot\icons\VancouverCanucks.ico" />
-    <None Include="wwwroot\icons\VegasGoldenKnights.ico" />
-    <None Include="wwwroot\icons\WashingtonCapitals.ico" />
-    <None Include="wwwroot\icons\WesternConference.ico" />
-    <None Include="wwwroot\icons\WinnipegJets.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.5">
