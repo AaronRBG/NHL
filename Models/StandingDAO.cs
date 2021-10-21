@@ -46,12 +46,12 @@ namespace NHL.Models
                     DataSet ds = Broker.Instance().Run("SELECT TOP 1 [dbo].calculateH2H(" + (i + 1).ToString() + "," + (j + 1).ToString() + "," + SeasonDAO.getCurrentSeason() + ") FROM [dbo].[Standings]", "H2H");
                     DataTable dt = ds.Tables["H2H"];
                     byte h2h = (byte)dt.Rows[0][0];
-                    switch (h2h)
+                    aux[j] = h2h switch
                     {
-                        case 1: aux[j] = 0.5; break;
-                        case 2: aux[j] = -0.5; break;
-                        default: aux[j] = 0; break;
-                    }
+                        1 => 0.5,
+                        2 => -0.5,
+                        _ => 0,
+                    };
                 }
                 res[i] = aux;
             }
@@ -103,7 +103,7 @@ namespace NHL.Models
                         }
                         aux[j] += standings.Where(s => s.ID_Team == teams[i]).Select(s => s.Matches_Left * 2).First() - pb[teams[i] - 1][teams[k] - 1];
                         int Clooseness = Plooseness[teams[i] - 1] / 2 + Plooseness[teams[k] - 1] / 2;
-                        if (aux[j] > Plooseness[i])
+                        if (aux[j] > Plooseness[i]*2)
                         {
                             aux[j] = double.MaxValue;
                         }

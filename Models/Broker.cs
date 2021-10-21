@@ -5,42 +5,44 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class Broker
+namespace NHL.Models
 {
-    private readonly SqlDataAdapter adp = new SqlDataAdapter();
-
-    private static Broker _instance;
-
-    public Broker() { }
-
-    public static Broker Instance()
-
+    public class Broker
     {
-        if (_instance == null)
-        {
-            _instance = new Broker();
-        }
-        return _instance;
-    }
+        private readonly SqlDataAdapter adp = new SqlDataAdapter();
 
-    public DataSet Run(string query, string reff)
-    {
-        SqlConnection con = new SqlConnection("server = localhost; database = NHL; Trusted_Connection = True;");
-        con.Open();
-        SqlCommand comm = new SqlCommand(query, con);
-        DataSet ds = new DataSet();
-        try
+        private static Broker _instance;
+
+        public Broker() { }
+
+        public static Broker Instance()
+
         {
-            adp.SelectCommand = comm;
-            adp.Fill(ds, reff);
+            if (_instance == null)
+            {
+                _instance = new Broker();
+            }
+            return _instance;
         }
-        catch (Exception)
+
+        public DataSet Run(string query, string reff)
         {
+            SqlConnection con = new SqlConnection("server = localhost; database = NHL; Trusted_Connection = True;");
+            con.Open();
+            SqlCommand comm = new SqlCommand(query, con);
+            DataSet ds = new DataSet();
+            try
+            {
+                adp.SelectCommand = comm;
+                adp.Fill(ds, reff);
+            }
+            catch (Exception)
+            {
+                con.Close();
+            }
+
             con.Close();
+            return ds;
         }
-
-        con.Close();
-        return ds;
     }
 }
-

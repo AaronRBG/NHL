@@ -8,141 +8,164 @@
     Standing[] pacific = Model.standings.standings.Where(s => s.Division == 3).ToArray();
     Standing[] central = Model.standings.standings.Where(s => s.Division == 4).ToArray();
 }
-<div class="text-center">
-    <h4>ATLANTIC DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>Points</th>
-                <th>MP</th>
-                <th>ML</th>
-                <th>RW</th>
-                <th>RL</th>
-                <th>OW</th>
-                <th>OL</th>
-                <th>SW</th>
-                <th>SL</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Standing s in atlantic)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(s.ID_Team)</td>
-                    <td>@s.Points</td>
-                    <td>@s.Matches_Played</td>
-                    <td>@s.Matches_Left</td>
-                    <td>@s.Regulation_Wins</td>
-                    <td>@s.Regulation_Losses</td>
-                    <td>@s.Overtime_Wins</td>
-                    <td>@s.Overtime_Losses</td>
-                    <td>@s.Shootout_Wins</td>
-                    <td>@s.Shootout_Losses</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h4>METROPOLITAN DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>Points</th>
-                <th>MP</th>
-                <th>ML</th>
-                <th>RW</th>
-                <th>RL</th>
-                <th>OW</th>
-                <th>OL</th>
-                <th>SW</th>
-                <th>SL</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Standing s in metro)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(s.ID_Team)</td>
-                    <td>@s.Points</td>
-                    <td>@s.Matches_Played</td>
-                    <td>@s.Matches_Left</td>
-                    <td>@s.Regulation_Wins</td>
-                    <td>@s.Regulation_Losses</td>
-                    <td>@s.Overtime_Wins</td>
-                    <td>@s.Overtime_Losses</td>
-                    <td>@s.Shootout_Wins</td>
-                    <td>@s.Shootout_Losses</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h4>CENTRAL DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>Points</th>
-                <th>MP</th>
-                <th>ML</th>
-                <th>RW</th>
-                <th>RL</th>
-                <th>OW</th>
-                <th>OL</th>
-                <th>SW</th>
-                <th>SL</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Standing s in central)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(s.ID_Team)</td>
-                    <td>@s.Points</td>
-                    <td>@s.Matches_Played</td>
-                    <td>@s.Matches_Left</td>
-                    <td>@s.Regulation_Wins</td>
-                    <td>@s.Regulation_Losses</td>
-                    <td>@s.Overtime_Wins</td>
-                    <td>@s.Overtime_Losses</td>
-                    <td>@s.Shootout_Wins</td>
-                    <td>@s.Shootout_Losses</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h4>PACIFIC DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>Points</th>
-                <th>MP</th>
-                <th>ML</th>
-                <th>RW</th>
-                <th>RL</th>
-                <th>OW</th>
-                <th>OL</th>
-                <th>SW</th>
-                <th>SL</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Standing s in pacific)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(s.ID_Team)</td>
-                    <td>@s.Points</td>
-                    <td>@s.Matches_Played</td>
-                    <td>@s.Matches_Left</td>
-                    <td>@s.Regulation_Wins</td>
-                    <td>@s.Regulation_Losses</td>
-                    <td>@s.Overtime_Wins</td>
-                    <td>@s.Overtime_Losses</td>
-                    <td>@s.Shootout_Wins</td>
-                    <td>@s.Shootout_Losses</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="text-center" style="padding-right: 10vw; padding-left: 10vw; overflow: auto;">
+    <img src="~/icons/EasternConference.png" width="auto" height="" />
+    <div>
+        <div style="float: left">
+            <h4>ATLANTIC DIVISION</h4>
+            <table class="table table-striped table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>Points</th>
+                        <th>MP</th>
+                        <th>ML</th>
+                        <th>RW</th>
+                        <th>RL</th>
+                        <th>OW</th>
+                        <th>OL</th>
+                        <th>SW</th>
+                        <th>SL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Standing s in atlantic)
+                    {
+                        string aux = Model.teams.getTeamName(s.ID_Team).Replace(" ", "").Replace(".", "") + "_logo";
+                        <tr>
+                            <td><span class="@aux"></span></td>
+                            <td style="text-align: left">@Model.teams.getTeamName(s.ID_Team)</td>
+                            <td>@s.Points</td>
+                            <td>@s.Matches_Played</td>
+                            <td>@s.Matches_Left</td>
+                            <td>@s.Regulation_Wins</td>
+                            <td>@s.Regulation_Losses</td>
+                            <td>@s.Overtime_Wins</td>
+                            <td>@s.Overtime_Losses</td>
+                            <td>@s.Shootout_Wins</td>
+                            <td>@s.Shootout_Losses</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="float: right">
+            <h4>METROPOLITAN DIVISION</h4>
+            <table class="table table-striped table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>Points</th>
+                        <th>MP</th>
+                        <th>ML</th>
+                        <th>RW</th>
+                        <th>RL</th>
+                        <th>OW</th>
+                        <th>OL</th>
+                        <th>SW</th>
+                        <th>SL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Standing s in metro)
+                    {
+                        string aux = Model.teams.getTeamName(s.ID_Team).Replace(" ", "").Replace(".", "") + "_logo";
+                        <tr>
+                            <td><span class="@aux"></span></td>
+                            <td style="text-align: left">@Model.teams.getTeamName(s.ID_Team)</td>
+                            <td>@s.Points</td>
+                            <td>@s.Matches_Played</td>
+                            <td>@s.Matches_Left</td>
+                            <td>@s.Regulation_Wins</td>
+                            <td>@s.Regulation_Losses</td>
+                            <td>@s.Overtime_Wins</td>
+                            <td>@s.Overtime_Losses</td>
+                            <td>@s.Shootout_Wins</td>
+                            <td>@s.Shootout_Losses</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </br>
+    <img src="~/icons/WesternConference.png" width="auto" height="100" />
+    <div>
+        <div style="float: left">
+            <h4>CENTRAL DIVISION</h4>
+            <table class="table table-striped table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>Points</th>
+                        <th>MP</th>
+                        <th>ML</th>
+                        <th>RW</th>
+                        <th>RL</th>
+                        <th>OW</th>
+                        <th>OL</th>
+                        <th>SW</th>
+                        <th>SL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Standing s in central)
+                    {
+                        string aux = Model.teams.getTeamName(s.ID_Team).Replace(" ", "").Replace(".", "") + "_logo";
+                        <tr>
+                            <td><span class="@aux"></span></td>
+                            <td style="text-align: left">@Model.teams.getTeamName(s.ID_Team)</td>
+                            <td>@s.Points</td>
+                            <td>@s.Matches_Played</td>
+                            <td>@s.Matches_Left</td>
+                            <td>@s.Regulation_Wins</td>
+                            <td>@s.Regulation_Losses</td>
+                            <td>@s.Overtime_Wins</td>
+                            <td>@s.Overtime_Losses</td>
+                            <td>@s.Shootout_Wins</td>
+                            <td>@s.Shootout_Losses</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="float: right">
+            <h4>PACIFIC DIVISION</h4>
+            <table class="table table-striped table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>Points</th>
+                        <th>MP</th>
+                        <th>ML</th>
+                        <th>RW</th>
+                        <th>RL</th>
+                        <th>OW</th>
+                        <th>OL</th>
+                        <th>SW</th>
+                        <th>SL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Standing s in pacific)
+                    {
+                        string aux = Model.teams.getTeamName(s.ID_Team).Replace(" ", "").Replace(".", "") + "_logo";
+                        <tr>
+                            <td><span class="@aux"></span></td>
+                            <td style="text-align: left">@Model.teams.getTeamName(s.ID_Team)</td>
+                            <td>@s.Points</td>
+                            <td>@s.Matches_Played</td>
+                            <td>@s.Matches_Left</td>
+                            <td>@s.Regulation_Wins</td>
+                            <td>@s.Regulation_Losses</td>
+                            <td>@s.Overtime_Wins</td>
+                            <td>@s.Overtime_Losses</td>
+                            <td>@s.Shootout_Wins</td>
+                            <td>@s.Shootout_Losses</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

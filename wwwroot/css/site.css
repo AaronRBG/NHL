@@ -69,12 +69,294 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
-
 /* icons */
 
-.nhl_icon {
-    background: url('../icons/NHL.png');
-    width: 32px;
-    height: 32px;
+.AnaheimDucks_logo {
+    background: url('/icons/AnaheimDucks.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
     display: inline-block;
 }
+
+.ArizonaCoyotes_logo {
+    background: url('/icons/ArizonaCoyotes.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.BostonBruins_logo {
+    background: url('/icons/BostonBruins.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.BuffaloSabres_logo {
+    background: url('/icons/BuffaloSabres.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.CalgaryFlames_logo {
+    background: url('/icons/CalgaryFlames.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.CarolinaHurricanes_logo {
+    background: url('/icons/CarolinaHurricanes.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.ChicagoBlackhawks_logo {
+    background: url('/icons/ChicagoBlackhawks.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.ColoradoAvalanche_logo {
+    background: url('/icons/ColoradoAvalanche.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.ColumbusBlueJackets_logo {
+    background: url('/icons/ColumbusBlueJackets.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.DallasStars_logo {
+    background: url('/icons/DallasStars.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.DetroitRedWings_logo {
+    background: url('/icons/DetroitRedWings.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.EdmontonOilers_logo {
+    background: url('/icons/EdmontonOilers.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.FloridaPanthers_logo {
+    background: url('/icons/FloridaPanthers.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.LosAngelesKings_logo {
+    background: url('/icons/LosAngelesKings.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.MinnesotaWild_logo {
+    background: url('/icons/MinnesotaWild.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.MontrealCanadiens_logo {
+    background: url('/icons/MontrealCanadiens.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.NashvillePredators_logo {
+    background: url('/icons/NashvillePredators.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.NewJerseyDevils_logo {
+    background: url('/icons/NewJerseyDevils.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.NewYorkIslanders_logo {
+    background: url('/icons/NewYorkIslanders.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.NewYorkRangers_logo {
+    background: url('/icons/NewYorkRangers.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.OttawaSenators_logo {
+    background: url('/icons/OttawaSenators.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.PhiladelphiaFlyers_logo {
+    background: url('/icons/PhiladelphiaFlyers.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.PittsburghPenguins_logo {
+    background: url('/icons/PittsburghPenguins.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.SanJoseSharks_logo {
+    background: url('/icons/SanJoseSharks.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.SeattleKraken_logo {
+    background: url('/icons/SeattleKraken.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.StLouisBlues_logo {
+    background: url('/icons/StLouisBlues.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.TampaBayLightning_logo {
+    background: url('/icons/TampaBayLightning.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.TorontoMapleLeafs_logo {
+    background: url('/icons/TorontoMapleLeafs.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.VancouverCanucks_logo {
+    background: url('/icons/VancouverCanucks.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.VegasGoldenKnights_logo {
+    background: url('/icons/VegasGoldenKnights.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.WashingtonCapitals_logo {
+    background: url('/icons/WashingtonCapitals.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+.WinnipegJets_logo {
+    background: url('/icons/WinnipegJets.png');
+    height: 24px;
+    width: 36px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+}
+
+

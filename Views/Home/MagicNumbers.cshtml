@@ -11,178 +11,155 @@
     byte[] metroTeams = Model.standings.getDivisionTeams(2);
     byte[] pacificTeams = Model.standings.getDivisionTeams(3);
     byte[] centralTeams = Model.standings.getDivisionTeams(4);
-    byte[] easternTeams = pacificTeams.Concat(centralTeams).ToArray();
-    byte[] westernTeams = atlanticTeams.Concat(metroTeams).ToArray();
+    byte[] westernTeams = pacificTeams.Concat(centralTeams).ToArray();
+    byte[] easternTeams = atlanticTeams.Concat(metroTeams).ToArray();
     string better = "<-";
 }
-<div class="text-center">
-    <h4>ATLANTIC DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in atlanticTeams)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(teamA)</td>
-                    @for (int i = 0; i < atlanticTeams.Length; i++)
+<div class="text-center" style="padding-right: 10vw; padding-left: 10vw; overflow: auto;">
+    <img src="~/icons/EasternConference.png" width="auto" height="100" />
+    <div>
+        <div style="float: left">
+            <h4>ATLANTIC DIVISION</h4>
+            <table class="table table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (byte teamA in atlanticTeams)
                     {
-                        double res = @Model.standings.magicNumbersDivision[teamA][i];
-                        if (res == double.MaxValue)
+                        string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
+                    <tr>
+                        <td><span class="@aux"></span></td>
+                        <td>@Model.teams.getTeamName(teamA)</td>
+                        @for (int i = 0; i < atlanticTeams.Length; i++)
                         {
-                            <td class="table-danger">*</td>
+                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            if (res == double.MaxValue)
+                            {
+                                <td class="table-danger">*</td>
+                            }
+                            else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
+                            {
+                                res = ((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                            {
+                                res = Math.Round((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if (res > 0)
+                            {
+                                <td class="table-primary">@res</td>
+                            }
+                            else if (res == 0)
+                            {
+                                <td class="table-info">-</td>
+                            }
+                            else
+                            {
+                                <td class="table-success">@better</td>
+                            }
                         }
-                        else if ((res % Math.PI == 0) && res != 0)
-                        {
-                            res = ((res / 2) / Math.PI);
-                            <td class="table-warning">@res</td>
-                        }
-                        else if (res > 0)
-                        {
-                            <td class="table-primary">@res</td>
-                        }
-                        else if (res == 0)
-                        {
-                            <td class="table-info">-</td>
-                        }
-                        else
-                        {
-                            <td class="table-success">@better</td>
-                        }
+                    </tr>
                     }
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h4>METROPOLITAN DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in metroTeams)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(teamA)</td>
-                    @for (int i = 0; i < metroTeams.Length; i++)
+                </tbody>
+            </table>
+        </div>
+        <div style="float: right">
+            <h4>METROPOLITAN DIVISION</h4>
+            <table class="table table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (byte teamA in metroTeams)
                     {
+                        string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
+                    <tr>
+                        <td><span class="@aux"></span></td>
+                        <td>@Model.teams.getTeamName(teamA)</td>
+                        @for (int i = 0; i < metroTeams.Length; i++)
+                        {
 
-                        double res = @Model.standings.magicNumbersDivision[teamA][i];
-                        if (res == double.MaxValue)
-                        {
-                            <td class="table-danger">*</td>
+                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            if (res == double.MaxValue)
+                            {
+                                <td class="table-danger">*</td>
+                            }
+                            else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
+                            {
+                                res = ((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                            {
+                                res = Math.Round((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if (res > 0)
+                            {
+                                <td class="table-primary">@res</td>
+                            }
+                            else if (res == 0)
+                            {
+                                <td class="table-info">-</td>
+                            }
+                            else
+                            {
+                                <td class="table-success">@better</td>
+                            }
                         }
-                        else if ((res % Math.PI == 0) && res != 0)
-                        {
-                            res = ((res / 2) / Math.PI);
-                            <td class="table-warning">@res</td>
-                        }
-                        else if (res > 0)
-                        {
-                            <td class="table-primary">@res</td>
-                        }
-                        else if (res == 0)
-                        {
-                            <td class="table-info">-</td>
-                        }
-                        else
-                        {
-                            <td class="table-success">@better</td>
-                        }
+                    </tr>
                     }
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h4>PACIFIC DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in pacificTeams)
-            {
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h4>EASTERN WILDCARDS</h4>
+        <table class="table table-dark" style="color: white;">
+            <thead class="thead-light">
                 <tr>
-                    <td>@Model.teams.getTeamName(teamA)</td>
-                    @for (int i = 0; i < pacificTeams.Length; i++)
-                    {
-                        double res = @Model.standings.magicNumbersDivision[teamA][i];
-                        if (res == double.MaxValue)
-                        {
-                            <td class="table-danger">*</td>
-                        }
-                        else if ((res % Math.PI == 0) && res != 0)
-                        {
-                            res = ((res / 2) / Math.PI);
-                            <td class="table-warning">@res</td>
-                        }
-                        else if (res > 0)
-                        {
-                            <td class="table-primary">@res</td>
-                        }
-                        else if (res == 0)
-                        {
-                            <td class="table-info">-</td>
-                        }
-                        else
-                        {
-                            <td class="table-success">@better</td>
-                        }
-                    }
+                    <th colspan="2">Team</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <h4>CENTRAL DIVISION</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in centralTeams)
-            {
+            </thead>
+            <tbody>
+                @foreach (byte teamA in easternTeams)
+                {
+                    string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
                 <tr>
+                    <td><span class="@aux"></span></td>
                     <td>@Model.teams.getTeamName(teamA)</td>
                     @for (int i = 0; i < centralTeams.Length; i++)
                     {
@@ -191,9 +168,14 @@
                         {
                             <td class="table-danger">*</td>
                         }
-                        else if ((res % Math.PI == 0) && res != 0)
+                        else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
                         {
                             res = ((res / 2) / Math.PI);
+                            <td class="table-warning">@res</td>
+                        }
+                        else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                        {
+                            res = Math.Round((res / 2) / Math.PI);
                             <td class="table-warning">@res</td>
                         }
                         else if (res > 0)
@@ -210,30 +192,154 @@
                         }
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-    <h4>EASTERN WILDCARDS</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in easternTeams)
-            {
+                }
+            </tbody>
+        </table>
+    </div>
+    </br>
+    <img src="~/icons/WesternConference.png" width="auto" height="100" />
+    <div>
+        <div style="float: left">
+            <h4>CENTRAL DIVISION</h4>
+            <table class="table table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (byte teamA in centralTeams)
+                    {
+                        string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
+                    <tr>
+                        <td><span class="@aux"></span></td>
+                        <td>@Model.teams.getTeamName(teamA)</td>
+                        @for (int i = 0; i < centralTeams.Length; i++)
+                        {
+                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            if (res == double.MaxValue)
+                            {
+                                <td class="table-danger">*</td>
+                            }
+                            else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
+                            {
+                                res = ((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                            {
+                                res = Math.Round((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if (res > 0)
+                            {
+                                <td class="table-primary">@res</td>
+                            }
+                            else if (res == 0)
+                            {
+                                <td class="table-info">-</td>
+                            }
+                            else
+                            {
+                                <td class="table-success">@better</td>
+                            }
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="float: right">
+            <h4>PACIFIC DIVISION</h4>
+            <table class="table table-dark" style="color: white;">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">Team</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (byte teamA in pacificTeams)
+                    {
+                        string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
+                    <tr>
+                        <td><span class="@aux"></span></td>
+                        <td>@Model.teams.getTeamName(teamA)</td>
+                        @for (int i = 0; i < pacificTeams.Length; i++)
+                        {
+                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            if (res == double.MaxValue)
+                            {
+                                <td class="table-danger">*</td>
+                            }
+                            else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
+                            {
+                                res = ((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                            {
+                                res = Math.Round((res / 2) / Math.PI);
+                                <td class="table-warning">@res</td>
+                            }
+                            else if (res > 0)
+                            {
+                                <td class="table-primary">@res</td>
+                            }
+                            else if (res == 0)
+                            {
+                                <td class="table-info">-</td>
+                            }
+                            else
+                            {
+                                <td class="table-success">@better</td>
+                            }
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h4>WESTERN WILDCARDS</h4>
+        <table class="table table-dark" style="color: white;">
+            <thead class="thead-light">
                 <tr>
+                    <th colspan="2">Team</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                    <th>10</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (byte teamA in westernTeams)
+                {
+                    string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
+                <tr>
+                    <td><span class="@aux"></span></td>
                     <td>@Model.teams.getTeamName(teamA)</td>
                     @for (int i = 0; i < centralTeams.Length; i++)
                     {
@@ -242,9 +348,14 @@
                         {
                             <td class="table-danger">*</td>
                         }
-                        else if ((res % Math.PI == 0) && res != 0)
+                        else if ((Math.Round(res % Math.PI, 2) == 0) && res != 0)
                         {
                             res = ((res / 2) / Math.PI);
+                            <td class="table-warning">@res</td>
+                        }
+                        else if ((Math.Round((res % Math.PI - Math.PI), 2) == 0) && res != 0)
+                        {
+                            res = Math.Round((res / 2) / Math.PI);
                             <td class="table-warning">@res</td>
                         }
                         else if (res > 0)
@@ -261,58 +372,8 @@
                         }
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-    <h4>WESTERN WILDCARDS</h4>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Team</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>10</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (byte teamA in westernTeams)
-            {
-                <tr>
-                    <td>@Model.teams.getTeamName(teamA)</td>
-                    @for (int i = 0; i < centralTeams.Length; i++)
-                    {
-                        double res = @Model.standings.magicNumbersDivision[teamA][i];
-                        if (res == double.MaxValue)
-                        {
-                            <td class="table-danger">*</td>
-                        }
-                        else if ((res % Math.PI == 0) && res != 0)
-                        {
-                            res = ((res / 2) / Math.PI);
-                            <td class="table-warning">@res</td>
-                        }
-                        else if (res > 0)
-                        {
-                            <td class="table-primary">@res</td>
-                        }
-                        else if (res == 0)
-                        {
-                            <td class="table-info">-</td>
-                        }
-                        else
-                        {
-                            <td class="table-success">@better</td>
-                        }
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
