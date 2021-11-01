@@ -8,7 +8,7 @@ namespace NHL.Models
 {
     public class MatchDAO
     {
-        public List<Match> matches { get; set; }
+        public static List<Match> matches { get; set; }
 
         public MatchDAO()
         {
@@ -43,7 +43,7 @@ namespace NHL.Models
                         + m.Season + ','
                         + m.Win_Type + ','
                         + rs + ')', "insertNewMatches");
-                    this.matches.Add(m);
+                    MatchDAO.matches.Add(m);
                 }
             }
         }
@@ -61,5 +61,31 @@ namespace NHL.Models
             }
             return b;
         }
+
+        public static short getTiebreaker(byte ID_TeamA, byte ID_TeamB, int ID_Season)
+        {
+            short res = 0;
+
+            List<Match> loc = MatchDAO.matches.Where(m => m.Local_Team == ID_TeamA && m.Visitor_Team == ID_TeamB && m.Season == ID_Season).ToList();
+            List<Match> vis = MatchDAO.matches.Where(m => m.Local_Team == ID_TeamB && m.Visitor_Team == ID_TeamA && m.Season == ID_Season).ToList();
+
+            if (loc.Count != 0 && vis.Count != 0)
+            {
+                while (loc.Count > vis.Count)
+                {
+                    loc.RemoveAt(loc.Count - 1);
+                }
+                while (vis.Count > loc.Count)
+                {
+                    loc.RemoveAt(vis.Count - 1);
+                }
+
+                int a = loc.Count(m => m.Winner == ID_TeamA) * 2 + vis.Count(m => m.Winner == ID_TeamA) * 2 + loc.Count(m => m.Winner != ID_TeamA && m.Win_Type != 0) + vis.Count(m => m.Winner != ID_TeamA && m.Win_Type != 0);
+
+                res = (short)(a / (loc.Count + vis.Count));
+            }
+            return res;
+        }
+
     }
 }

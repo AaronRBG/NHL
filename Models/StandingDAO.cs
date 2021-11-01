@@ -35,7 +35,17 @@ namespace NHL.Models
 
         public short getConferenceTiebreaker(byte ID_Team, int ID_Season)
         {
-            throw new NotImplementedException();
+            short res = 0;
+            Standing team = standings.Where(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season).First();
+
+            byte[] teams = standings.Where(t => t.Points == team.Points && t.Conference == team.Conference && t.ID_Season == ID_Season).Select(t => t.ID_Team).ToArray();
+
+            if (teams.Length > 0)
+            {
+                res = getTiebreakers(ID_Team, ID_Season, teams);
+            }
+
+            return res;
         }
 
         public short getDivisionTiebreaker(byte ID_Team, int ID_Season)
@@ -43,7 +53,24 @@ namespace NHL.Models
             short res = 0;
             Standing team = standings.Where(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season).First();
 
-            standings.Where(t => t.Points == team.Points && t.Division == team.Division);
+            byte[] teams = standings.Where(t => t.Points == team.Points && t.Division == team.Division && t.ID_Season == ID_Season).Select(t => t.ID_Team).ToArray();
+
+            if(teams.Length > 0)
+            {
+                res = getTiebreakers(ID_Team, ID_Season, teams);
+            }
+
+            return res;
+        }
+
+        private short getTiebreakers(byte ID_Team, int ID_Season, byte[] teams)
+        {
+            short res = 0;
+
+            foreach(byte team in teams)
+            {
+                res += MatchDAO.getTiebreaker(ID_Team, team, ID_Season);
+            }
 
             return res;
         }
