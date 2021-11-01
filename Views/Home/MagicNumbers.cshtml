@@ -7,10 +7,10 @@
     Standing[] metro = Model.standings.standings.Where(s => s.Division == 2).ToArray();
     Standing[] pacific = Model.standings.standings.Where(s => s.Division == 3).ToArray();
     Standing[] central = Model.standings.standings.Where(s => s.Division == 4).ToArray();
-    byte[] atlanticTeams = Model.standings.getDivisionTeams(1);
-    byte[] metroTeams = Model.standings.getDivisionTeams(2);
-    byte[] pacificTeams = Model.standings.getDivisionTeams(3);
-    byte[] centralTeams = Model.standings.getDivisionTeams(4);
+    byte[] atlanticTeams = Model.standings.getDivisionTeamsID(1);
+    byte[] metroTeams = Model.standings.getDivisionTeamsID(2);
+    byte[] pacificTeams = Model.standings.getDivisionTeamsID(3);
+    byte[] centralTeams = Model.standings.getDivisionTeamsID(4);
     byte[] westernTeams = pacificTeams.Concat(centralTeams).ToArray();
     byte[] easternTeams = atlanticTeams.Concat(metroTeams).ToArray();
     string better = "<-";

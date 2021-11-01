@@ -19,18 +19,42 @@ namespace NHL.Models
             List<Standing> aux = new List<Standing>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                Standing s = new Standing((byte)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (byte)dt.Rows[i][5], (byte)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (byte)dt.Rows[i][9], (int)dt.Rows[i][10], (byte)dt.Rows[i][11], (byte)dt.Rows[i][12]);
+                Standing s = new Standing((byte)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (byte)dt.Rows[i][5], (byte)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (byte)dt.Rows[i][9], (int)dt.Rows[i][10], (byte)dt.Rows[i][11], (byte)dt.Rows[i][12], (short)dt.Rows[i][13], (short)dt.Rows[i][14], (short)dt.Rows[i][15]);
                 aux.Add(s);
             }
             standings = aux.ToArray();
+            foreach(Standing s in standings)
+            {
+                s.Division_Tiebreaker = getDivisionTiebreaker(s.ID_Team, s.ID_Season);
+                s.Conference_Tiebreaker = getConferenceTiebreaker(s.ID_Team, s.ID_Season);
+            }
             double[][] h2h = calculateH2H();
             int[][] pb = calculatePB();
             magicNumbersDivision = calculateMagicNumbersDivision(h2h, pb);
         }
 
-        public byte[] getDivisionTeams(byte division)
+        public short getConferenceTiebreaker(byte ID_Team, int ID_Season)
         {
-            return standings.Where(s => s.Division == division).OrderBy(s => s.Points * -1).Select(s => s.ID_Team).ToArray();
+            throw new NotImplementedException();
+        }
+
+        public short getDivisionTiebreaker(byte ID_Team, int ID_Season)
+        {
+            short res = 0;
+            Standing team = standings.Where(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season).First();
+
+            standings.Where(t => t.Points == team.Points && t.Division == team.Division);
+
+            return res;
+        }
+
+        public Standing[] getDivisionTeams(byte division)
+        {
+            return standings.Where(s => s.Division == division).OrderByDescending(s => s.Points).ThenByDescending(s => s.Matches_Left).ThenByDescending(s => s.Regulation_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins + s.Shootout_Wins).ThenByDescending(s => s.Goal_Difference).ThenByDescending(s => s.Goals_For).ToArray();
+        }
+        public byte[] getDivisionTeamsID(byte division)
+        {
+            return getDivisionTeams(division).Select(s => s.ID_Team).ToArray();
         }
 
         private double[][] calculateH2H()
@@ -85,7 +109,7 @@ namespace NHL.Models
 
             for (byte division = 1; division < 5; division++)
             {
-                byte[] teams = getDivisionTeams(division);
+                byte[] teams = getDivisionTeamsID(division);
 
                 for (int i = 0; i < teams.Length; i++)
                 {

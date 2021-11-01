@@ -3,10 +3,10 @@
     @model NHL.Models.Info
 }
 @{
-    Standing[] atlantic = Model.standings.standings.Where(s => s.Division == 1).ToArray();
-    Standing[] metro = Model.standings.standings.Where(s => s.Division == 2).ToArray();
-    Standing[] pacific = Model.standings.standings.Where(s => s.Division == 3).ToArray();
-    Standing[] central = Model.standings.standings.Where(s => s.Division == 4).ToArray();
+    Standing[] atlantic = Model.standings.getDivisionTeams(1);
+    Standing[] metro = Model.standings.getDivisionTeams(2);
+    Standing[] pacific = Model.standings.getDivisionTeams(3);
+    Standing[] central = Model.standings.getDivisionTeams(4);
 }
 <div class="text-center" style="padding-right: 10vw; padding-left: 10vw; overflow: auto;">
     <img src="~/icons/EasternConference.png" width="auto" height="" />
