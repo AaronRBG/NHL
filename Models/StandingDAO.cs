@@ -109,7 +109,7 @@ namespace NHL.Models
             return res;
         }
 
-        private int[][] calculatePB()
+        private int[][] calculatePB()       // PB is Points Behind // We search in pb[ -1] because of how it is calculated
         {
             const int N_TEAMS = 32;
             int[][] res = new int[N_TEAMS][];
@@ -132,7 +132,16 @@ namespace NHL.Models
         {
             Dictionary<byte, double[]> res = new Dictionary<byte, double[]>();
 
-            int[] Plooseness = standings.Select(s => s.Matches_Left * 2).ToArray();
+            Dictionary<byte, int> Plooseness = new Dictionary<byte, int>();
+
+            {
+                byte[] PloosenessKey = standings.Select(s => s.ID_Team).ToArray();
+                int[] PloosenessValue = standings.Select(s => s.Matches_Left * 2).ToArray();
+                for(int i=0; i<PloosenessKey.Length; i++)
+                {
+                    Plooseness.Add(PloosenessKey[i], PloosenessValue[i]);
+                }
+            }
 
             for (byte division = 1; division < 5; division++)
             {
@@ -152,13 +161,13 @@ namespace NHL.Models
                                 aux[j] = h2h[teams[i] - 1][teams[k] - 1];
                             }
                         }
-                        aux[j] += standings.Where(s => s.ID_Team == teams[i]).Select(s => s.Matches_Left * 2).First() - pb[teams[i] - 1][teams[k] - 1];
-                        int Clooseness = Plooseness[teams[i] - 1] / 2 + Plooseness[teams[k] - 1] / 2;
-                        if (aux[j] > Plooseness[i]*2)
+                        int Clooseness = Plooseness[teams[i]] + Plooseness[teams[k]];
+                        aux[j] += Plooseness[teams[k]] - pb[teams[i] - 1][teams[k] - 1];
+                        if (aux[j] > Clooseness)
                         {
                             aux[j] = double.MaxValue;
                         }
-                        else if (aux[j] > Clooseness)
+                        else if (aux[j] > Plooseness[teams[i]])
                         {
                             aux[j] = (aux[j] * 2 * Math.PI);
                         }

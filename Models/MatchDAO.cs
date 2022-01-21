@@ -77,7 +77,7 @@ namespace NHL.Models
                 }
                 while (vis.Count > loc.Count)
                 {
-                    loc.RemoveAt(vis.Count - 1);
+                    vis.RemoveAt(vis.Count - 1);
                 }
 
                 int a = loc.Count(m => m.Winner == ID_TeamA) * 2 + vis.Count(m => m.Winner == ID_TeamA) * 2 + loc.Count(m => m.Winner != ID_TeamA && m.Win_Type != 0) + vis.Count(m => m.Winner != ID_TeamA && m.Win_Type != 0);
