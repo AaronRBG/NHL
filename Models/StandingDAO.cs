@@ -126,6 +126,10 @@ namespace NHL.Models
                 double[] aux = new double[N_TEAMS];
                 for (int j = 0; j < N_TEAMS; j++)
                 {
+                    if(i==3 & j == 8)
+                    {
+                        int a = 0;
+                    }
                     DataSet ds = Broker.Instance().Run("SELECT TOP 1 [dbo].calculateH2H(" + (i + 1).ToString() + "," + (j + 1).ToString() + "," + SeasonDAO.getCurrentSeason() + ") FROM [dbo].[Standings]", "H2H");
                     DataTable dt = ds.Tables["H2H"];
                     byte h2h = (byte)dt.Rows[0][0];
@@ -226,7 +230,7 @@ namespace NHL.Models
                 }
             }
 
-            for (byte conference = 1; conference < 2; conference++)
+            for (byte conference = 1; conference <= 2; conference++)
             {
                 byte[] teams = getConferenceTeamsID(conference, true);
 

@@ -32,7 +32,7 @@ namespace NHL.Models
             }
             else
             {
-                return 2022;    // Return the default season value if between seasons
+                return DateTime.Today.Year;    // Return the default season value if between seasons
             }
         }
 

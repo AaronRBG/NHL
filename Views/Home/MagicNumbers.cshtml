@@ -188,9 +188,9 @@
                             <td>@Model.teams.getTeamName(teamA)</td>
                         }
 
-                        @for (int i = 0; i < centralTeams.Length; i++)
+                        @for (int i = 0; i < easternTeams.Length; i++)
                         {
-                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            double res = @Model.standings.magicNumbersConference[teamA][i];
                             if (res == double.MaxValue)
                             {
                                 <td class="table-danger">*</td>
@@ -395,9 +395,9 @@
                             <td>@Model.teams.getTeamName(teamA)</td>
                         }
 
-                        @for (int i = 0; i < centralTeams.Length; i++)
+                        @for (int i = 0; i < westernTeams.Length; i++)
                         {
-                            double res = @Model.standings.magicNumbersDivision[teamA][i];
+                            double res = @Model.standings.magicNumbersConference[teamA][i];
                             if (res == double.MaxValue)
                             {
                                 <td class="table-danger">*</td>
