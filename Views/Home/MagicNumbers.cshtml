@@ -11,13 +11,21 @@
     byte[] metroTeams = Model.standings.getDivisionTeamsID(2);
     byte[] pacificTeams = Model.standings.getDivisionTeamsID(3);
     byte[] centralTeams = Model.standings.getDivisionTeamsID(4);
-    byte[] easternTeams = Model.standings.getConferenceTeamsID(1, true);
-    byte[] westernTeams = Model.standings.getConferenceTeamsID(2, true);
+    byte[] easternTeams = Model.standings.getConferenceTeamsID(1, false);
+    byte[] westernTeams = Model.standings.getConferenceTeamsID(2, false);
+    byte[] easternWC = new byte[2];
+    easternWC[0] = Model.standings.getConferenceTeamsID(1, true).First();
+    easternWC[1] = Model.standings.getConferenceTeamsID(1, true)[1];
+    byte[] westernWC = new byte[2];
+    westernWC[0] = Model.standings.getConferenceTeamsID(2, true).First();
+    westernWC[1] = Model.standings.getConferenceTeamsID(2, true)[1];
     string better = "<-";
 }
-<div class="text-center" style="padding-right: 10vw; padding-left: 10vw; overflow: auto;">
-    <img src="~/icons/EasternConference.png" width="auto" height="100" />
-    <div>
+<div class="text-center" style="padding-right: 10vw; padding-left: 10vw; overflow: auto; display: grid;">
+    <div class="grid-item">
+        <img src="~/icons/EasternConference.png" width="auto" height="100" />
+    </div>
+    <div class="grid-item">
         <div style="float: left">
             <h4>ATLANTIC DIVISION</h4>
             <table class="table table-dark" style="color: white;">
@@ -154,22 +162,22 @@
             </table>
         </div>
     </div>
-    <div>
+    <div class="grid-item">
         <h4>EASTERN WILDCARDS</h4>
         <table class="table table-dark" style="color: white;">
             <thead class="thead-dark">
                 <tr>
                     <th colspan="2">Team</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
                     <th>7</th>
                     <th>8</th>
                     <th>9</th>
                     <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
                 </tr>
             </thead>
             <tbody>
@@ -177,7 +185,7 @@
                 {
                     string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
                     <tr>
-                        @if (easternTeams[0] == teamA || easternTeams[1] == teamA)
+                        @if (easternWC[0] == teamA || easternWC[1] == teamA)
                         {
                             <td class="table-secondary"><span class="@aux"></span></td>
                             <td class="table-secondary">@Model.teams.getTeamName(teamA)</td>
@@ -188,7 +196,7 @@
                             <td>@Model.teams.getTeamName(teamA)</td>
                         }
 
-                        @for (int i = 0; i < easternTeams.Length; i++)
+                        @for (int i = 6; i < easternTeams.Length; i++)
                         {
                             double res = @Model.standings.magicNumbersConference[teamA][i];
                             if (res == double.MaxValue)
@@ -224,8 +232,10 @@
         </table>
     </div>
     </br>
-    <img src="~/icons/WesternConference.png" width="auto" height="100" />
-    <div>
+    <div class="grid-item">
+        <img src="~/icons/WesternConference.png" width="auto" height="100" />
+    </div>
+    <div class="grid-item">
         <div style="float: left">
             <h4>CENTRAL DIVISION</h4>
             <table class="table table-dark" style="color: white;">
@@ -361,22 +371,22 @@
             </table>
         </div>
     </div>
-    <div>
+    <div class="grid-item">
         <h4>WESTERN WILDCARDS</h4>
         <table class="table table-dark" style="color: white;">
             <thead class="thead-dark">
                 <tr>
                     <th colspan="2">Team</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
                     <th>7</th>
                     <th>8</th>
                     <th>9</th>
                     <th>10</th>
+                    <th>11</th>
+                    <th>12</th>
+                    <th>13</th>
+                    <th>14</th>
+                    <th>15</th>
+                    <th>16</th>
                 </tr>
             </thead>
             <tbody>
@@ -384,7 +394,7 @@
                 {
                     string aux = Model.teams.getTeamName(teamA).Replace(" ", "").Replace(".", "") + "_logo";
                     <tr>
-                        @if (westernTeams[0] == teamA || westernTeams[1] == teamA)
+                        @if (westernWC[0] == teamA || westernWC[1] == teamA)
                         {
                             <td class="table-secondary"><span class="@aux"></span></td>
                             <td class="table-secondary">@Model.teams.getTeamName(teamA)</td>
@@ -395,7 +405,7 @@
                             <td>@Model.teams.getTeamName(teamA)</td>
                         }
 
-                        @for (int i = 0; i < westernTeams.Length; i++)
+                        @for (int i = 6; i < westernTeams.Length; i++)
                         {
                             double res = @Model.standings.magicNumbersConference[teamA][i];
                             if (res == double.MaxValue)
