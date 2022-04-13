@@ -14,7 +14,7 @@ namespace NHL.Models
 
         public StandingDAO()
         {
-            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Standings] WHERE ID_Season = " + SeasonDAO.getCurrentSeason() + " ORDER BY [Points] DESC, [Regulation_Wins] DESC", "Standings");
+            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Standings] WHERE ID_Season = " + SeasonDAO.Current_Season + " ORDER BY [Points] DESC, [Regulation_Wins] DESC", "Standings");
             DataTable dt = ds.Tables["Standings"];
             List<Standing> aux = new List<Standing>();
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -129,7 +129,7 @@ namespace NHL.Models
                     try
                     {
 
-                        DataSet ds = Broker.Instance().Run("SELECT TOP 1 [dbo].calculateH2H(" + (i + 1).ToString() + "," + (j + 1).ToString() + "," + SeasonDAO.getCurrentSeason() + ") FROM [dbo].[Standings]", "H2H");
+                        DataSet ds = Broker.Instance().Run("SELECT TOP 1 [dbo].calculateH2H(" + (i + 1).ToString() + "," + (j + 1).ToString() + "," + SeasonDAO.Current_Season + ") FROM [dbo].[Standings]", "H2H");
                         DataTable dt = ds.Tables["H2H"];
                         byte h2h = (byte)dt.Rows[0][0];
                         aux[j] = h2h switch
@@ -140,7 +140,8 @@ namespace NHL.Models
                         };
                     } catch (Exception)
                     {
-                        aux[j] = 0;
+                        
+                        aux[j] = (byte)0;
                     }
                 }
                 res[i] = aux;

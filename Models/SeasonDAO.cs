@@ -9,6 +9,7 @@ namespace NHL.Models
     public class SeasonDAO
     {
         public Season[] seasons { get; set; }
+        public static int Current_Season { get; set; }
         public SeasonDAO()
         {
             DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Seasons]", "Seasons");
@@ -20,20 +21,15 @@ namespace NHL.Models
                 aux.Add(s);
             }
             seasons = aux.ToArray();
+            Current_Season = getCurrentSeason();
         }
 
-        public static int getCurrentSeason()
+        private static int getCurrentSeason()
         {
             DataSet ds = Broker.Instance().Run("SELECT ID_Season FROM Seasons WHERE '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' > [Start_Date] AND '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' < [Finish_Date]", "Current_Season");
             DataTable dt = ds.Tables["Current_Season"];
-            if (dt.Rows.Count != 0)
-            {
-                return (int)dt.Rows[0][0];
-            }
-            else
-            {
-                return DateTime.Today.Year;    // Return the default season value if between seasons
-            }
+            return (int)dt.Rows[0][0];
+
         }
 
         public void insert(Season s)

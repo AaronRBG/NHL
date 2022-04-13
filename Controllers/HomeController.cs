@@ -39,7 +39,7 @@ namespace NHL.Controllers
 
         public IActionResult Index()
         {
-            int season = SeasonDAO.getCurrentSeason();
+            int season = SeasonDAO.Current_Season;
             string url = "https://www.hockey-reference.com/leagues/NHL_" + season + "_games.html";
             var response = CallUrl(url).Result;
             //ParseSeason(response, season);    // Only needed when inputting old seasons
