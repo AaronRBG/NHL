@@ -54,12 +54,15 @@ namespace NHL.Models
                 + " AND [Visitor_Team] = " + m.Visitor_Team
                 + " AND [Match_Date] = '" + m.Match_Date.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'", "Exists?");
             DataTable dt = ds.Tables["Exists?"];
-            bool b = false;
-            if (dt.Rows.Count > 0)
+            try
             {
-                b = true;
+                int match = (int)dt.Rows[0][0];
+                return true;
             }
-            return b;
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public static short getTiebreaker(byte ID_TeamA, byte ID_TeamB, int ID_Season)
