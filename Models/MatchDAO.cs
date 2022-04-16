@@ -56,7 +56,7 @@ namespace NHL.Models
             DataTable dt = ds.Tables["Exists?"];
             try
             {
-                int match = (int)dt.Rows[0][0];
+                long match = (long)dt.Rows[0][0];
                 return true;
             }
             catch (Exception)
