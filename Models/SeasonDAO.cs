@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NHL.Models
+namespace NHL_Updater.Models
 {
     public class SeasonDAO
     {
@@ -26,9 +26,19 @@ namespace NHL.Models
 
         private static int getCurrentSeason()
         {
+            int result;
             DataSet ds = Broker.Instance().Run("SELECT ID_Season FROM Seasons WHERE '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' > [Start_Date] AND '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' < [Finish_Date]", "Current_Season");
             DataTable dt = ds.Tables["Current_Season"];
-            return (int)dt.Rows[0][0];
+            if (dt.Rows.Count > 0)
+            {
+                result = (int)dt.Rows[0][0];
+            }
+            else
+            {
+                result = DateTime.Today.Year;
+            }
+
+            return result;
 
         }
 

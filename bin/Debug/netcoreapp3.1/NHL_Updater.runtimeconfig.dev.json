@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\aharo\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\aharo\\.nuget\\packages"
+    ]
+  }
+}

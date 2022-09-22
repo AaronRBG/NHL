@@ -1,11 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
-namespace NHL.Models
+namespace NHL_Updater.Models
 {
     public class Broker
     {
@@ -13,7 +10,7 @@ namespace NHL.Models
 
         private static Broker _instance;
 
-        public Broker() { }
+        private Broker() { }
 
         public static Broker Instance()
 

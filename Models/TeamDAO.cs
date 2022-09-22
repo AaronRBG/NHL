@@ -1,11 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace NHL.Models
+namespace NHL_Updater.Models
 {
     public class TeamDAO
     {
@@ -44,12 +40,6 @@ namespace NHL.Models
                 }
             }
             return res;
-        }
-
-        public string getTeamName(byte teamID)
-        {
-            Team aux = teams.Single(t => t.ID_Team == teamID);
-            return aux.Team_Name;
         }
 
     }
