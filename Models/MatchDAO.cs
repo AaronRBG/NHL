@@ -59,9 +59,13 @@ namespace NHL.Models
                 long match = (long)dt.Rows[0][0];
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                if (true)
+                {
+                    Match ma = m;
+                    return false;
+                }
             }
         }
 

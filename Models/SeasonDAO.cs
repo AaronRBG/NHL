@@ -28,8 +28,17 @@ namespace NHL.Models
         {
             DataSet ds = Broker.Instance().Run("SELECT ID_Season FROM Seasons WHERE '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' > [Start_Date] AND '" + DateTime.Today.ToString("yyyy-MM-dd HH:mm:ss.fff") + "' < [Finish_Date]", "Current_Season");
             DataTable dt = ds.Tables["Current_Season"];
-            return (int)dt.Rows[0][0];
+            int result;
+            if (dt.Rows.Count > 0)
+            {
+                result = (int)dt.Rows[0][0];
+            }
+            else
+            {
+                result = DateTime.Today.Year;
+            }
 
+            return result;
         }
 
         public void insert(Season s)
