@@ -7,6 +7,8 @@ namespace NHL.Models
 {
     public class Match
     {
+        public Match() { }
+
         public Match(byte local_Team, byte visitor_Team, byte local_Goals, byte visitor_Goals, DateTime match_Date, int season, byte win_Type, bool regular_Season)
         {
             Local_Team = local_Team;

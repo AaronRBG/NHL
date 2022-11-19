@@ -29,7 +29,7 @@ namespace NHL.Controllers
 
         private async Task<Info> initialize()
         {
-            Task<Win_TypeDAO> win_typeDAO = Task.Run(() => new Win_TypeDAO());
+            Task<WinTypeDAO> win_typeDAO = Task.Run(() => new WinTypeDAO());
             Task<SeasonDAO> seasonDAO = Task.Run(() => new SeasonDAO());
             Task<TeamDAO> teamDAO = Task.Run(() => new TeamDAO());
             Task<MatchDAO> matchDAO = Task.Run(() => new MatchDAO());

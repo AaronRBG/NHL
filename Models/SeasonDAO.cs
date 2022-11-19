@@ -2,25 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
 
 namespace NHL.Models
 {
     public class SeasonDAO
     {
-        public Season[] seasons { get; set; }
-        public static int Current_Season { get; set; }
+        public List<Season> seasons;
+        public static int Current_Season;
         public SeasonDAO()
         {
-            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Seasons]", "Seasons");
-            DataTable dt = ds.Tables["Seasons"];
-            List<Season> aux = new List<Season>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                Season s = new Season((int)dt.Rows[i][0], (DateTime)dt.Rows[i][1], (DateTime)dt.Rows[i][2], (byte)dt.Rows[i][3]);
-                aux.Add(s);
-            }
-            seasons = aux.ToArray();
+            string query = "SELECT* FROM[dbo].[Seasons]";
+            seasons = Broker.Instance().GetConnection().Query<Season>(query).ToList();
+
             Current_Season = getCurrentSeason();
         }
 

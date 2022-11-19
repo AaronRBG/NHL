@@ -10,6 +10,7 @@ namespace NHL.Models
     public class Broker
     {
         private readonly SqlDataAdapter adp = new SqlDataAdapter();
+        private const string connectionString = "server = localhost; database = NHL; Trusted_Connection = True;";
 
         private static Broker _instance;
 
@@ -27,7 +28,7 @@ namespace NHL.Models
 
         public DataSet Run(string query, string reff)
         {
-            SqlConnection con = new SqlConnection("server = localhost; database = NHL; Trusted_Connection = True;");
+            SqlConnection con = new SqlConnection(connectionString);
             con.Open();
             SqlCommand comm = new SqlCommand(query, con);
             DataSet ds = new DataSet();
@@ -43,6 +44,11 @@ namespace NHL.Models
 
             con.Close();
             return ds;
+        }
+
+        public SqlConnection GetConnection()
+        {
+            return new SqlConnection(connectionString);
         }
     }
 }
