@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U9NNlhZNepMNErKrKtuxjyw6xzKUH0pEtbNORx8ZB7IqI2ml5AVFUZ0CwND6hA1gNR/ma25b1Vh7iuQyhEGNFQ==",
+  "dgSpecHash": "IvtVJrCr9hE+9ORv5l7AHzd54diVqpARfc/uCXsinnA8FtE/aJJ14UHU8sZU1M6TVAuSHMtOJpiT3D+E2Ho1Ug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\NHL_Updater.csproj",
+  "projectFilePath": "C:\\Users\\aharo\\source\\repos\\NHL\\NHL_Updater.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\aharo\\.nuget\\packages\\htmlagilitypack\\1.11.43\\htmlagilitypack.1.11.43.nupkg.sha512",
     "C:\\Users\\aharo\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

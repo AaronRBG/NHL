@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\NHL_Updater.csproj": {}
+    "C:\\Users\\aharo\\source\\repos\\NHL\\NHL_Updater.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\NHL_Updater.csproj": {
+    "C:\\Users\\aharo\\source\\repos\\NHL\\NHL_Updater.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\NHL_Updater.csproj",
+        "projectUniqueName": "C:\\Users\\aharo\\source\\repos\\NHL\\NHL_Updater.csproj",
         "projectName": "NHL_Updater",
-        "projectPath": "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\NHL_Updater.csproj",
+        "projectPath": "C:\\Users\\aharo\\source\\repos\\NHL\\NHL_Updater.csproj",
         "packagesPath": "C:\\Users\\aharo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aharo\\source\\repos\\NHL_Updater_Git\\obj\\",
+        "outputPath": "C:\\Users\\aharo\\source\\repos\\NHL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aharo\\AppData\\Roaming\\NuGet\\NuGet.Config",
