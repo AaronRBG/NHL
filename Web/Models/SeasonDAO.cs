@@ -12,7 +12,7 @@ namespace NHL.Models
         public static int Current_Season;
         public SeasonDAO()
         {
-            string query = "SELECT* FROM[dbo].[Seasons]";
+            string query = "SELECT * FROM [dbo].[Seasons]";
             seasons = Broker.Instance().GetConnection().Query<Season>(query).ToList();
 
             Current_Season = getCurrentSeason();
