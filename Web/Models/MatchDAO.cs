@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
 
 namespace NHL.Models
 {
@@ -12,15 +12,8 @@ namespace NHL.Models
 
         public MatchDAO()
         {
-            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Matches]", "Matches");
-            DataTable dt = ds.Tables["Matches"];
-            List<Match> aux = new List<Match>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                Match m = new Match((long)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (DateTime)dt.Rows[i][5], (int)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (bool)dt.Rows[i][9]);
-                aux.Add(m);
-            }
-            matches = aux;
+            string query = "SELECT * FROM [dbo].[Matches]";
+            matches = Broker.Instance().GetConnection().Query<Match>(query).ToList();
         }
 
         public void insertNewMatches(Match[] matches)
@@ -59,9 +52,13 @@ namespace NHL.Models
                 long match = (long)dt.Rows[0][0];
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                if (true)
+                {
+                    Match ma = m;
+                    return false;
+                }
             }
         }
 

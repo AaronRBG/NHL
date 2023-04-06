@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using Dapper;
 
 namespace NHL.Models
 {
     public class StandingDAO
     {
-        public Standing[] standings { get; set; }
+        public List<Standing> standings;
         public Dictionary<byte, double[]> magicNumbersDivision { get; set; }
         public Dictionary<byte, double[]> magicNumbersConference { get; set; }
 
         public StandingDAO()
         {
-            DataSet ds = Broker.Instance().Run("SELECT * FROM [dbo].[Standings] WHERE ID_Season = " + SeasonDAO.Current_Season + " ORDER BY [Points] DESC, [Regulation_Wins] DESC", "Standings");
-            DataTable dt = ds.Tables["Standings"];
-            List<Standing> aux = new List<Standing>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                Standing s = new Standing((byte)dt.Rows[i][0], (byte)dt.Rows[i][1], (byte)dt.Rows[i][2], (byte)dt.Rows[i][3], (byte)dt.Rows[i][4], (byte)dt.Rows[i][5], (byte)dt.Rows[i][6], (byte)dt.Rows[i][7], (byte)dt.Rows[i][8], (byte)dt.Rows[i][9], (int)dt.Rows[i][10], (byte)dt.Rows[i][11], (byte)dt.Rows[i][12], (short)dt.Rows[i][13], (short)dt.Rows[i][14], (short)dt.Rows[i][15]);
-                aux.Add(s);
-            }
-            standings = aux.ToArray();
+            string query = "SELECT * FROM [dbo].[Standings] WHERE ID_Season = " + SeasonDAO.Current_Season + " ORDER BY [Points] DESC, [Regulation_Wins] DESC";
+            standings = Broker.Instance().GetConnection().Query<Standing>(query).ToList();
+
             foreach (Standing s in standings)
             {
                 s.Division_Tiebreaker = getDivisionTiebreaker(s.ID_Team, s.ID_Season);
@@ -37,7 +31,7 @@ namespace NHL.Models
         public short getConferenceTiebreaker(byte ID_Team, int ID_Season)
         {
             short res = 0;
-            Standing team = standings.Where(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season).First();
+            Standing team = standings.First(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season);
 
             byte[] teams = standings.Where(t => t.Points == team.Points && t.Conference == team.Conference && t.ID_Season == ID_Season).Select(t => t.ID_Team).ToArray();
 
@@ -52,7 +46,7 @@ namespace NHL.Models
         public short getDivisionTiebreaker(byte ID_Team, int ID_Season)
         {
             short res = 0;
-            Standing team = standings.Where(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season).First();
+            Standing team = standings.First(t => t.ID_Team == ID_Team && t.ID_Season == ID_Season);
 
             byte[] teams = standings.Where(t => t.Points == team.Points && t.Division == team.Division && t.ID_Season == ID_Season).Select(t => t.ID_Team).ToArray();
 
@@ -78,7 +72,14 @@ namespace NHL.Models
 
         public Standing[] getDivisionTeams(byte division)
         {
-            return standings.Where(s => s.Division == division).OrderByDescending(s => s.Points).ThenByDescending(s => s.Matches_Left).ThenByDescending(s => s.Regulation_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins + s.Shootout_Wins).ThenByDescending(s => s.Goal_Difference).ThenByDescending(s => s.Goals_For).ToArray();
+            return standings.Where(s => s.Division == division)
+                .OrderByDescending(s => s.Points)
+                .ThenByDescending(s => s.Matches_Left)
+                .ThenByDescending(s => s.Regulation_Wins)
+                .ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins)
+                .ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins + s.Shootout_Wins)
+                .ThenByDescending(s => s.Goal_Difference)
+                .ThenByDescending(s => s.Goals_For).ToArray();
         }
         public byte[] getDivisionTeamsID(byte division)
         {
@@ -87,7 +88,14 @@ namespace NHL.Models
 
         public Standing[] getConferenceTeams(byte conference, bool prune3firsts)
         {
-            List<Standing> teams = standings.Where(s => s.Conference == conference).OrderByDescending(s => s.Points).ThenByDescending(s => s.Matches_Left).ThenByDescending(s => s.Regulation_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins).ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins + s.Shootout_Wins).ThenByDescending(s => s.Goal_Difference).ThenByDescending(s => s.Goals_For).ToList();
+            List<Standing> teams = standings.Where(s => s.Conference == conference)
+                .OrderByDescending(s => s.Points)
+                .ThenByDescending(s => s.Matches_Left)
+                .ThenByDescending(s => s.Regulation_Wins)
+                .ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins)
+                .ThenByDescending(s => s.Regulation_Wins + s.Overtime_Wins + s.Shootout_Wins)
+                .ThenByDescending(s => s.Goal_Difference)
+                .ThenByDescending(s => s.Goals_For).ToList();
 
             if (prune3firsts)
             {
